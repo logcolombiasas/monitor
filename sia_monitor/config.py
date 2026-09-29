@@ -31,6 +31,8 @@ class CameraConfig:
     location_name: str = ""
     latitude: float | None = None
     longitude: float | None = None
+    address: str = ""
+    """Dirección exacta donde está instalada la cámara (se guarda con cada lectura)."""
     enabled: bool = True
     id: str = field(default_factory=lambda: uuid.uuid4().hex[:8])
 

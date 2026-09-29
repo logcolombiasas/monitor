@@ -92,7 +92,7 @@ class Reporter:
 
     def _send(self, read: PlateRead) -> None:
         cam = read.camera
-        common = dict(camera_name=cam.name, location_name=cam.display_location,
+        common = dict(camera_name=cam.name, location_name=cam.display_location, address=cam.address,
                       latitude=cam.latitude, longitude=cam.longitude)
         result = self.api.report_sighting(read.plate, raw_text=read.raw_text, **common)
         if result.get("found"):

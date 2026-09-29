@@ -115,3 +115,42 @@ def test_reporter_reintenta_si_no_hay_internet():
     reporter.stop()
     assert False in statuses and statuses[-1] is True
     assert api.detections == []
+
+
+# --- Coordenadas ------------------------------------------------------------
+
+from sia_monitor.geo import format_coordinates, parse_coordinates  # noqa: E402
+
+
+def test_coordenadas_copiadas_de_google_maps():
+    assert parse_coordinates("4.686012, -74.056034") == (4.686012, -74.056034)
+    assert parse_coordinates(" 4.6860 -74.0560 ") == (4.686, -74.056)
+    assert parse_coordinates("4.6860;-74.0560") == (4.686, -74.056)
+    assert parse_coordinates("https://www.google.com/maps/@4.6860,-74.0560,17z") == (4.686, -74.056)
+    assert parse_coordinates("https://maps.google.com/?q=4.6860,-74.0560") == (4.686, -74.056)
+
+
+def test_coordenadas_invalidas():
+    assert parse_coordinates("") is None
+    assert parse_coordinates("Calle 80") is None
+    assert parse_coordinates("95.0, -74.0") is None
+    assert parse_coordinates("0, 0") is None
+
+
+def test_format_coordinates():
+    assert format_coordinates(4.686, -74.056) == "4.686000, -74.056000"
+    assert format_coordinates(None, -74.0) == ""
+
+
+def test_reporter_envia_la_direccion_de_la_camara():
+    api = FakeApi()
+    results = []
+    reporter = Reporter(api, on_result=lambda read, res: results.append(res))
+    reporter.start()
+    cam = CameraConfig(name="Entrada", source="0", location_name="Parqueadero 80",
+                       address="Calle 80 # 15-20", latitude=4.686, longitude=-74.056)
+    reporter.submit(PlateRead(plate="ABC123", camera=cam, confidence=0.9))
+    assert _wait(lambda: results)
+    reporter.stop()
+    kwargs = api.reports[0][1]
+    assert kwargs["address"] == "Calle 80 # 15-20" and kwargs["latitude"] == 4.686 and kwargs["longitude"] == -74.056

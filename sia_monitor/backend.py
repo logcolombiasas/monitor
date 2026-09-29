@@ -160,9 +160,9 @@ def _auth_message(error: Exception) -> str:
 
 
 REPORT_SIGHTING = """
-mutation ReportSighting($plate: String!, $latitude: Float, $longitude: Float, $locationName: String,
+mutation ReportSighting($plate: String!, $latitude: Float, $longitude: Float, $locationName: String, $address: String,
                         $sourceType: String, $sourceName: String, $rawText: String) {
-  reportSighting(plate: $plate, latitude: $latitude, longitude: $longitude, locationName: $locationName,
+  reportSighting(plate: $plate, latitude: $latitude, longitude: $longitude, locationName: $locationName, address: $address,
                  sourceType: $sourceType, sourceName: $sourceName, rawText: $rawText) {
     found plate id vehicleType brand line color modelYear reason priority notes
   }
@@ -203,13 +203,14 @@ class Api:
             raise ApiError(body["errors"][0].get("message", "Error GraphQL"))
         return body["data"]
 
-    def report_sighting(self, plate: str, *, camera_name: str, location_name: str,
+    def report_sighting(self, plate: str, *, camera_name: str, location_name: str, address: str,
                         latitude: float | None, longitude: float | None, raw_text: str = "") -> dict[str, Any]:
         data = self._run(REPORT_SIGHTING, {
             "plate": plate,
             "latitude": latitude,
             "longitude": longitude,
             "locationName": location_name,
+            "address": address or None,
             "sourceType": "fija",
             "sourceName": camera_name,
             "rawText": raw_text,
@@ -217,13 +218,15 @@ class Api:
         return data["reportSighting"]
 
     def create_detection(self, plate: str, wanted_plate_id: str | None, *, camera_name: str,
-                         location_name: str, latitude: float | None, longitude: float | None) -> str | None:
+                         location_name: str, address: str, latitude: float | None,
+                         longitude: float | None) -> str | None:
         payload = {
             "plate": plate,
             "wantedPlateId": wanted_plate_id,
             "status": "alerta",
             "sourceType": "fija",
             "locationName": location_name,
+            "address": address or None,
             "latitude": latitude,
             "longitude": longitude,
             "detectedBy": camera_name,

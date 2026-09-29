@@ -42,7 +42,10 @@ class CameraTile(QFrame):
         self.setObjectName("tile")
         self._set_border("#242527")
 
-        self.title = QLabel(f"<b>{camera.name}</b>  <span style='color:#94a3b8'>{camera.display_location}</span>")
+        no_location = "" if camera.latitude is not None else \
+            "  <span style='color:#f59e0b'>⚠ sin coordenadas: edita la cámara</span>"
+        self.title = QLabel(f"<b>{camera.name}</b>  <span style='color:#94a3b8'>{camera.display_location}</span>"
+                            f"{no_location}")
         self.state = QLabel()
         header = QHBoxLayout()
         header.addWidget(self.title, 1)
