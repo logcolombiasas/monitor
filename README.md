@@ -1,7 +1,7 @@
 # SIA Monitor
 
 Centro de monitoreo **tipo DVR** para Windows: muestra varias cámaras en una cuadrícula y **lee las
-placas de todas al mismo tiempo**. Cada placa leída se envía al backend de **SIA Admin** (el mismo
+placas de todas al mismo tiempo**. Cada placa leída se envía al backend de **SIA Admin** ([`logcolombiasas/sia-admin`](https://github.com/logcolombiasas/sia-admin)) (el mismo
 del panel web de placas y la app móvil):
 
 - Queda en el **historial de placas** con la cámara y el lugar, esté o no en el listado.
