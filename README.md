@@ -1,8 +1,8 @@
 # SIA Monitor
 
 Centro de monitoreo **tipo DVR** para Windows: muestra varias cámaras en una cuadrícula y **lee las
-placas de todas al mismo tiempo**. Cada placa leída se envía al backend de Logcolombia (el mismo
-del panel web y la app móvil):
+placas de todas al mismo tiempo**. Cada placa leída se envía al backend de **SIA Admin** (el mismo
+del panel web de placas y la app móvil):
 
 - Queda en el **historial de placas** con la cámara y el lugar, esté o no en el listado.
 - Si la placa está en el **listado de placas buscadas**, el monitor dispara una alerta (sonido,
@@ -39,10 +39,11 @@ del panel web y la app móvil):
 1. Descarga `SIAMonitor-windows.zip` desde la pestaña **Actions** (último build de `main`,
    sección *Artifacts*) o desde **Releases**, y descomprímelo, por ejemplo en
    `C:\SIAMonitor`.
-2. Copia `amplify_outputs.json` (el del repositorio `logcolombiasas/logcolombia` o el que se
-   descarga de la consola de Amplify) **en la misma carpeta que `SIAMonitor.exe`**.
+2. Copia `amplify_outputs.json` del backend de SIA (consola de Amplify → app **SIA Admin** → rama
+   `main` → *Deployed backend resources* → **Download amplify_outputs.json**) **en la misma
+   carpeta que `SIAMonitor.exe`**.
    Si no está, el programa lo pide al abrir.
-3. En Cognito, crea un usuario para el monitor (ej. `monitor.central@logcolombia.com`) y agrégalo al
+3. En Cognito, crea un usuario para el monitor (ej. `monitor.central@correo.com`) y agrégalo al
    grupo **`camara`**.
 4. Abre `SIAMonitor.exe` e inicia sesión. La primera vez pide cambiar la contraseña
    temporal y descarga los modelos de reconocimiento (~10 MB, requiere internet).
