@@ -9,8 +9,8 @@ import cv2
 import numpy as np
 import pytest
 
-from logcolombia_monitor.camera import CameraWorker
-from logcolombia_monitor.config import CameraConfig
+from sia_monitor.camera import CameraWorker
+from sia_monitor.config import CameraConfig
 
 
 def synthetic_frame(text: str = "ABC 123") -> np.ndarray:
@@ -24,7 +24,7 @@ def synthetic_frame(text: str = "ABC 123") -> np.ndarray:
 @pytest.fixture(scope="module")
 def engine():
     try:
-        from logcolombia_monitor.engine import PlateEngine
+        from sia_monitor.engine import PlateEngine
         return PlateEngine()
     except Exception as error:  # sin internet para descargar modelos
         pytest.skip(f"Motor ALPR no disponible: {error}")

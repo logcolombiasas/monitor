@@ -39,7 +39,7 @@ def setup_logging() -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="logcolombia-monitor", description=APP_NAME)
+    parser = argparse.ArgumentParser(prog="sia-monitor", description=APP_NAME)
     parser.add_argument("--sin-servidor", action="store_true",
                         help="Modo prueba: muestra las placas leídas sin enviarlas al servidor.")
     args = parser.parse_args(argv)
@@ -61,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
         backend = load_backend_config(config.amplify_outputs)
     except FileNotFoundError:
         QMessageBox.information(None, APP_NAME,
-                                "Selecciona el archivo amplify_outputs.json del backend de Logcolombia.")
+                                "Selecciona el archivo amplify_outputs.json del backend de SIA.")
         path, _ = QFileDialog.getOpenFileName(None, "amplify_outputs.json", "", "JSON (*.json)")
         if not path:
             return 1

@@ -1,4 +1,4 @@
-# Logcolombia Monitor
+# SIA Monitor
 
 Centro de monitoreo **tipo DVR** para Windows: muestra varias cámaras en una cuadrícula y **lee las
 placas de todas al mismo tiempo**. Cada placa leída se envía al backend de Logcolombia (el mismo
@@ -14,7 +14,7 @@ del panel web y la app móvil):
  📹 📹 📹               📹 📹                  📹 📹 📹 📹
         └──────────────── RTSP ─┴──────────────────────┘
                         ▼
-        🖥️  Logcolombia Monitor (este programa)
+        🖥️  SIA Monitor (este programa)
             cuadrícula en vivo + lectura de placas en el PC
                         ▼  solo el texto de la placa (no el video)
         Backend Amplify: reportSighting → historial + ¿está en el listado?
@@ -36,15 +36,15 @@ del panel web y la app móvil):
 
 ## Instalación (Windows 10/11)
 
-1. Descarga `LogcolombiaMonitor-windows.zip` desde la pestaña **Actions** (último build de `main`,
+1. Descarga `SIAMonitor-windows.zip` desde la pestaña **Actions** (último build de `main`,
    sección *Artifacts*) o desde **Releases**, y descomprímelo, por ejemplo en
-   `C:\LogcolombiaMonitor`.
+   `C:\SIAMonitor`.
 2. Copia `amplify_outputs.json` (el del repositorio `logcolombiasas/logcolombia` o el que se
-   descarga de la consola de Amplify) **en la misma carpeta que `LogcolombiaMonitor.exe`**.
+   descarga de la consola de Amplify) **en la misma carpeta que `SIAMonitor.exe`**.
    Si no está, el programa lo pide al abrir.
 3. En Cognito, crea un usuario para el monitor (ej. `monitor.central@logcolombia.com`) y agrégalo al
    grupo **`camara`**.
-4. Abre `LogcolombiaMonitor.exe` e inicia sesión. La primera vez pide cambiar la contraseña
+4. Abre `SIAMonitor.exe` e inicia sesión. La primera vez pide cambiar la contraseña
    temporal y descarga los modelos de reconocimiento (~10 MB, requiere internet).
 
 ## Agregar cámaras
@@ -80,21 +80,21 @@ es abrir en el router de la sede el puerto RTSP hacia el NVR, con usuario y clav
 Si se necesitan más cámaras, se pueden instalar varios monitores (por ejemplo, uno por sede), todos
 con cuentas del grupo `camara`. Todas las lecturas y alertas llegan al mismo panel web.
 
-Ajustes avanzados en `%APPDATA%\Logcolombia Monitor\config.json`:
+Ajustes avanzados en `%APPDATA%\SIA Monitor\config.json`:
 `analyze_fps` (cuadros analizados por segundo por cámara), `cooldown_minutes`, `min_confidence`.
 
 ## Modo prueba (sin servidor)
 
 ```
-LogcolombiaMonitor.exe --sin-servidor
+SIAMonitor.exe --sin-servidor
 ```
 
 Muestra las placas leídas sin enviarlas al backend. Sirve para instalar y ajustar cámaras en sitio.
 
 ## Archivos del programa
 
-- Configuración y cámaras: `%APPDATA%\Logcolombia Monitor\config.json`
-- Registro de lecturas y errores: `%APPDATA%\Logcolombia Monitor\monitor.log`
+- Configuración y cámaras: `%APPDATA%\SIA Monitor\config.json`
+- Registro de lecturas y errores: `%APPDATA%\SIA Monitor\monitor.log`
 
 ## Desarrollo
 
@@ -104,7 +104,7 @@ python -m venv .venv
 pip install -r requirements-dev.txt
 python run.py                     # o: python run.py --sin-servidor
 pytest                            # pruebas (incluye el motor de placas con video sintético)
-pyinstaller --noconfirm monitor.spec   # genera dist/LogcolombiaMonitor/
+pyinstaller --noconfirm monitor.spec   # genera dist/SIAMonitor/
 ```
 
 GitHub Actions (`.github/workflows/build.yml`) corre las pruebas y genera el `.zip` de Windows en
@@ -113,7 +113,7 @@ cada push a `main`. Al crear un tag `v1.0.0` publica el `.zip` como Release.
 ## Estructura
 
 ```
-logcolombia_monitor/
+sia_monitor/
   app.py            Inicio: configuración, login y ventana principal
   backend.py        Cognito (grupo camara) y GraphQL: reportSighting / createPlateDetection
   camera.py         Lectura de cada cámara (RTSP/USB/archivo), reconexión y análisis

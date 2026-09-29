@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Any
 
 from PySide6.QtCore import QObject, Qt, QTimer, QUrl, Signal
-from PySide6.QtGui import QAction, QIcon
+from PySide6.QtGui import QAction, QIcon, QPixmap
 from PySide6.QtMultimedia import QSoundEffect
 from PySide6.QtWidgets import (
     QDockWidget, QGridLayout, QLabel, QListWidget, QListWidgetItem, QMainWindow, QMenu, QMessageBox,
@@ -79,6 +79,11 @@ class MainWindow(QMainWindow):
     def _build_ui(self) -> None:
         toolbar = self.addToolBar("Principal")
         toolbar.setMovable(False)
+        logo = QLabel()
+        logo.setPixmap(QPixmap(str(resource_path("assets/logo_dark.png"))).scaledToHeight(
+            40, Qt.TransformationMode.SmoothTransformation))
+        logo.setContentsMargins(6, 0, 18, 0)
+        toolbar.addWidget(logo)
         add = QAction("➕ Agregar cámara", self)
         add.triggered.connect(self.add_camera)
         toolbar.addAction(add)
@@ -102,7 +107,7 @@ class MainWindow(QMainWindow):
         # Panel lateral: alertas y lecturas recientes
         side = QWidget()
         side_layout = QVBoxLayout(side)
-        side_layout.addWidget(QLabel("<b style='color:#f87171'>🚨 Vehículos del listado</b>"))
+        side_layout.addWidget(QLabel("<b style='color:#ED1C24'>🚨 Vehículos del listado</b>"))
         self.alerts = QListWidget()
         self.alerts.setIconSize(self.alerts.iconSize() * 3)
         side_layout.addWidget(self.alerts, 2)

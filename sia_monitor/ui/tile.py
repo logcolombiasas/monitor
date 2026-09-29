@@ -40,7 +40,7 @@ class CameraTile(QFrame):
         super().__init__()
         self.camera = camera
         self.setObjectName("tile")
-        self._set_border("#1e293b")
+        self._set_border("#242527")
 
         self.title = QLabel(f"<b>{camera.name}</b>  <span style='color:#94a3b8'>{camera.display_location}</span>")
         self.state = QLabel()
@@ -65,12 +65,12 @@ class CameraTile(QFrame):
 
         self._flash = QTimer(self)
         self._flash.setSingleShot(True)
-        self._flash.timeout.connect(lambda: self._set_border("#1e293b"))
+        self._flash.timeout.connect(lambda: self._set_border("#242527"))
         self._frame_id = -1
         self.set_state(CameraState.CONNECTING, "")
 
     def _set_border(self, color: str) -> None:
-        self.setStyleSheet(f"#tile {{ background: #0f172a; border: 3px solid {color}; border-radius: 10px; }}")
+        self.setStyleSheet(f"#tile {{ background: #121314; border: 3px solid {color}; border-radius: 10px; }}")
 
     def set_state(self, state: CameraState, message: str) -> None:
         color = STATE_COLORS.get(state, "#64748b")
@@ -89,7 +89,7 @@ class CameraTile(QFrame):
     def show_read(self, plate: str, found: bool, when: str) -> None:
         if found:
             self.last.setText(f"<b style='color:#f87171'>🚨 {format_plate(plate)} EN LISTADO</b> · {when}")
-            self._set_border("#dc2626")
+            self._set_border("#ED1C24")
             self._flash.start(15000)
         else:
             self.last.setText(f"Última: <b>{format_plate(plate)}</b> · {when}")

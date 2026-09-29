@@ -26,8 +26,8 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name="LogcolombiaMonitor",
+    name="SIAMonitor",
     icon="assets/icon.ico",
     console=False,
 )
-coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name="LogcolombiaMonitor")
+coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name="SIAMonitor")

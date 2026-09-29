@@ -13,12 +13,12 @@ from . import APP_NAME
 
 
 def data_dir() -> Path:
-    """%APPDATA%\\Logcolombia Monitor en Windows, ~/.config/logcolombia-monitor en otros."""
+    """%APPDATA%\\SIA Monitor en Windows, ~/.config/sia-monitor en otros."""
     if sys.platform == "win32":
         base = Path(os.environ.get("APPDATA", Path.home()))
         path = base / APP_NAME
     else:
-        path = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "logcolombia-monitor"
+        path = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "sia-monitor"
     path.mkdir(parents=True, exist_ok=True)
     return path
 

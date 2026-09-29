@@ -1,10 +1,10 @@
 import threading
 import time
 
-from logcolombia_monitor.config import AppConfig, CameraConfig
-from logcolombia_monitor.plates import format_plate, match_format, parse_plate
-from logcolombia_monitor.reporter import PlateRead, Reporter
-from logcolombia_monitor.tracker import PlateTracker
+from sia_monitor.config import AppConfig, CameraConfig
+from sia_monitor.plates import format_plate, match_format, parse_plate
+from sia_monitor.reporter import PlateRead, Reporter
+from sia_monitor.tracker import PlateTracker
 
 
 # --- Placas -----------------------------------------------------------------

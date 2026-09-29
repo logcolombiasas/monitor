@@ -1,5 +1,5 @@
 """
-Conexión con el backend Amplify de Logcolombia (el mismo del panel web y la app).
+Conexión con el backend Amplify de SIA (el mismo del panel administrativo y la app móvil).
 
 - Inicio de sesión con Cognito (SRP), con cuentas del grupo `camara` (o `admin`).
 - Llamadas GraphQL a AppSync: `reportSighting` (verifica y guarda en el historial)

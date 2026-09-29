@@ -7,22 +7,26 @@ import cv2
 import numpy as np
 from PySide6.QtGui import QImage, QPixmap
 
+# Identidad SIA: rojo #ED1C24, negro #050707, gris #A7A9AC
+BRAND_RED = "#ED1C24"
+BRAND_GRAY = "#A7A9AC"
+
 STYLE = """
-QMainWindow, QDialog { background: #0b1220; color: #e2e8f0; }
+QMainWindow, QDialog { background: #0b0c0d; color: #e5e7eb; }
 QLabel { color: #e2e8f0; }
 QLineEdit, QDoubleSpinBox, QSpinBox {
-    background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 6px; padding: 6px;
+    background: #1a1b1d; color: #f8fafc; border: 1px solid #3a3b3e; border-radius: 6px; padding: 6px;
 }
 QPushButton {
-    background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 6px; padding: 7px 14px;
+    background: #1a1b1d; color: #f8fafc; border: 1px solid #3a3b3e; border-radius: 6px; padding: 7px 14px;
 }
-QPushButton:hover { border-color: #0f66ff; }
-QPushButton#primary { background: #0f66ff; border-color: #0f66ff; font-weight: bold; }
-QToolBar { background: #0f172a; border: none; spacing: 6px; padding: 4px; }
+QPushButton:hover { border-color: #ED1C24; }
+QPushButton#primary { background: #ED1C24; border-color: #ED1C24; font-weight: bold; }
+QToolBar { background: #050707; border: none; border-bottom: 3px solid #ED1C24; spacing: 6px; padding: 4px; }
 QToolButton { color: #f8fafc; padding: 6px 10px; border-radius: 6px; }
-QToolButton:hover { background: #1e293b; }
-QStatusBar { background: #0f172a; color: #94a3b8; }
-QListWidget { background: #0f172a; color: #e2e8f0; border: 1px solid #1e293b; border-radius: 8px; }
+QToolButton:hover { background: #1a1b1d; }
+QStatusBar { background: #050707; color: #A7A9AC; }
+QListWidget { background: #121314; color: #e5e7eb; border: 1px solid #242527; border-radius: 8px; }
 QCheckBox { color: #e2e8f0; }
 QDockWidget { color: #e2e8f0; }
 """

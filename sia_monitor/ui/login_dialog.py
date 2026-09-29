@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QDialog, QFormLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout
 
 from .. import APP_NAME
 from ..backend import AuthError, NewPasswordRequired, Session
+from .common import resource_path
 
 
 class LoginDialog(QDialog):
@@ -16,11 +18,15 @@ class LoginDialog(QDialog):
         self.setWindowTitle(f"{APP_NAME} — Iniciar sesión")
         self.setMinimumWidth(420)
 
-        title = QLabel(f"<h2>{APP_NAME}</h2>Ingresa con la cuenta de cámaras asignada por el administrador.")
+        logo = QLabel()
+        logo.setPixmap(QPixmap(str(resource_path("assets/logo_dark.png"))).scaledToWidth(
+            320, Qt.TransformationMode.SmoothTransformation))
+        logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title = QLabel("<h3>Monitor de cámaras</h3>Ingresa con la cuenta de cámaras asignada por el administrador.")
         title.setWordWrap(True)
 
         self.email = QLineEdit(username)
-        self.email.setPlaceholderText("camaras@logcolombia.com")
+        self.email.setPlaceholderText("camaras@correo.com")
         self.password = QLineEdit()
         self.password.setEchoMode(QLineEdit.EchoMode.Password)
         self.new_password = QLineEdit()
@@ -45,6 +51,7 @@ class LoginDialog(QDialog):
         self.password.returnPressed.connect(self.submit)
 
         layout = QVBoxLayout(self)
+        layout.addWidget(logo)
         layout.addWidget(title)
         layout.addLayout(self.form)
         layout.addWidget(self.error)

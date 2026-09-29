@@ -1,7 +1,7 @@
 [project]
-name = "logcolombia-monitor"
+name = "sia-monitor"
 version = "1.0.0"
-description = "Centro de monitoreo de cámaras con lectura de placas para Logcolombia"
+description = "Centro de monitoreo de cámaras con lectura de placas para SIA - Servicios Integrados Automotriz"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
