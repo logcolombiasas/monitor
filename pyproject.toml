@@ -1,0 +1,9 @@
+[project]
+name = "logcolombia-monitor"
+version = "1.0.0"
+description = "Centro de monitoreo de cámaras con lectura de placas para Logcolombia"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

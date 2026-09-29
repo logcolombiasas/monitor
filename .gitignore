@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+# Configuración del backend (se copia junto al programa, no se sube a git)
+amplify_outputs.json
